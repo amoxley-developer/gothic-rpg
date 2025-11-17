@@ -1,11 +1,9 @@
-class_name Player_UI
+class_name PlayerUI
 extends Node2D
 
 enum States {UNSELECTED, SUBMENU_OPENED, SELECTED}
 
-# Make the PlayerSelections a map with string keys and PlayerSelection value. The PlayerSelection will be a resource
-enum PlayerSelections {BASIC_ATTACK, SPECIAL_ATTACK, ITEMS}
-
+@export var menu_items: Array[BattleMenuItem]
 
 var state: States = States.UNSELECTED
 
@@ -23,7 +21,7 @@ func _process(_delta: float) -> void:
 func set_state(new_state: States) -> void:
     var previous_state := state
     state = new_state
-    print('previous_state ', previous_state)
-    print('current_state ', state)
+    print('previous_state: ', previous_state)
+    print('current_state: ', state)
 
 

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BattleMenuItem" load_steps=5 format=3 uid="uid://brum441b6i0x4"]
+
+[ext_resource type="Script" uid="uid://cm1t0tx2ajv5w" path="res://scripts/resources/battle_menu_item.gd" id="1_76swv"]
+[ext_resource type="Script" uid="uid://cyeju7f68xikj" path="res://scripts/resources/sub_menu_item.gd" id="2_p4ha5"]
+[ext_resource type="Resource" uid="uid://bw3h73t8shth4" path="res://resources/sub_menu_item/item_potion.tres" id="3_2p43i"]
+[ext_resource type="Resource" uid="uid://drng3sllxksa1" path="res://resources/sub_menu_item/item_attack_up.tres" id="4_g2b0j"]
+
+[resource]
+script = ExtResource("1_76swv")
+sub_menu_items = Array[ExtResource("2_p4ha5")]([ExtResource("3_2p43i"), ExtResource("4_g2b0j")])
+metadata/_custom_type_script = "uid://cm1t0tx2ajv5w"
