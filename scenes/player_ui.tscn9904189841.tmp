@@ -1,0 +1,11 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5fg5t6squyfq"]
+
+[ext_resource type="Script" uid="uid://4jfuv1exou2r" path="res://scripts/scenes/player_ui.gd" id="1_jkj6h"]
+[ext_resource type="Script" uid="uid://cm1t0tx2ajv5w" path="res://scripts/resources/battle_menu_item.gd" id="2_sk4pr"]
+[ext_resource type="Resource" uid="uid://kfise7qwohwv" path="res://resources/battle_menu_item/player_attack.tres" id="3_48xfa"]
+[ext_resource type="Resource" uid="uid://iggb8b5k1aef" path="res://resources/battle_menu_item/player_special_attack.tres" id="4_7ctsh"]
+[ext_resource type="Resource" uid="uid://brum441b6i0x4" path="res://resources/battle_menu_item/player_item.tres" id="5_bkx2g"]
+
+[node name="PlayerUI" type="Node2D"]
+script = ExtResource("1_jkj6h")
+menu_items = Array[ExtResource("2_sk4pr")]([ExtResource("3_48xfa"), ExtResource("4_7ctsh"), ExtResource("5_bkx2g")])

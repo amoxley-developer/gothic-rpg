@@ -7,5 +7,6 @@
 
 [resource]
 script = ExtResource("1_76swv")
+name = "Items"
 sub_menu_items = Array[ExtResource("2_p4ha5")]([ExtResource("3_2p43i"), ExtResource("4_g2b0j")])
 metadata/_custom_type_script = "uid://cm1t0tx2ajv5w"
