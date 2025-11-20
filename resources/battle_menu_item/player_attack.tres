@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="BattleMenuItem" load_steps=5 format=3 uid="uid://kfise7qwohwv"]
 
-[ext_resource type="Script" uid="uid://cm1t0tx2ajv5w" path="res://scripts/resources/battle_menu_item.gd" id="1_et5ft"]
+[ext_resource type="Script" uid="uid://bxss58ftc0rwl" path="res://scripts/resources/battle_menu_item.gd" id="1_et5ft"]
 [ext_resource type="Script" uid="uid://cyeju7f68xikj" path="res://scripts/resources/sub_menu_item.gd" id="2_k6y3y"]
 [ext_resource type="Resource" uid="uid://dyreydslyytku" path="res://resources/sub_menu_item/attack_crossbow.tres" id="3_b7bws"]
 [ext_resource type="Resource" uid="uid://bv3cn4n87xx2l" path="res://resources/sub_menu_item/attack_sword.tres" id="4_nw7p0"]
 
 [resource]
 script = ExtResource("1_et5ft")
-name = "Attack"
+menu_name = "Attack"
 sub_menu_items = Array[ExtResource("2_k6y3y")]([ExtResource("3_b7bws"), ExtResource("4_nw7p0")])
 metadata/_custom_type_script = "uid://cm1t0tx2ajv5w"
