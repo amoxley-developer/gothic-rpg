@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://tijdyldp7ocq"]
+[gd_scene load_steps=6 format=3 uid="uid://tijdyldp7ocq"]
 
 [ext_resource type="Script" uid="uid://cm6004sincpcf" path="res://scripts/scenes/battle_menu_item_bar.gd" id="1_jycks"]
 [ext_resource type="Resource" uid="uid://brum441b6i0x4" path="res://resources/battle_menu_item/player_item.tres" id="2_fcmww"]
 [ext_resource type="Texture2D" uid="uid://dpn2niy0coqeg" path="res://assets/sprites/UI/menu_bar.png" id="2_lrwbx"]
+[ext_resource type="FontFile" uid="uid://bhd41uea4230r" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="4_ct7dt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fcmww"]
 animations = [{
@@ -26,6 +27,7 @@ menu_resource = ExtResource("2_fcmww")
 menu_name_node = NodePath("MenuName")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_fcmww")
 
 [node name="MenuName" type="RichTextLabel" parent="."]
@@ -33,6 +35,8 @@ offset_left = -64.0
 offset_top = -16.0
 offset_right = 64.0
 offset_bottom = 16.0
+theme_override_fonts/normal_font = ExtResource("4_ct7dt")
+theme_override_font_sizes/normal_font_size = 8
 text = "Test"
 horizontal_alignment = 1
 vertical_alignment = 1
