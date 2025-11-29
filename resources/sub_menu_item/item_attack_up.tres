@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SubMenuItem" load_steps=2 format=3 uid="uid://drng3sllxksa1"]
+
+[ext_resource type="Script" uid="uid://cyeju7f68xikj" path="res://scripts/resources/sub_menu_item.gd" id="1_iq2tb"]
+
+[resource]
+script = ExtResource("1_iq2tb")
+name = "Attack Up"
+metadata/_custom_type_script = "uid://cyeju7f68xikj"
