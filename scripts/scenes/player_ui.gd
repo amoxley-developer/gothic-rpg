@@ -2,7 +2,9 @@ class_name PlayerUI
 extends Node2D
 
 enum States {UNSELECTED, SUBMENU_OPENED, SELECTED}
-const MENU_HEIGHT := 32
+const MENU_HEIGHT := 16
+
+@onready var placeholderLabel: RichTextLabel = $RichTextLabel
 
 const battleMenuItemBarScn := preload("res://scenes/battle_menu_item_bar.tscn")
 @export var menu_items_resources: Array[BattleMenuItem]
@@ -10,13 +12,13 @@ var menu_items: Array[BattleMenuItemBar]
 var current_menu_item: BattleMenuItemBar
 var current_menu_item_idx := 0
 
-
 var state: States = States.UNSELECTED
 
 func _ready() -> void:
+	placeholderLabel.visible = false
 	create_menu_items()
 	set_current_menu_item(current_menu_item_idx)
-	print(current_menu_item.menu_name)
+	print('current menu item: ', current_menu_item.menu_name)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("accept") or Input.is_action_just_pressed("cancel"):
