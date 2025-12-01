@@ -13,6 +13,10 @@ config_version=5
 config/name="Gothic RPG"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
+[autoload]
+
+Enums="*res://scripts/enums/enums.gd"
+
 [input]
 
 accept={

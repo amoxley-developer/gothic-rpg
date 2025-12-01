@@ -17,8 +17,7 @@ var state: States = States.UNSELECTED
 func _ready() -> void:
 	placeholderLabel.visible = false
 	create_menu_items()
-	set_current_menu_item(current_menu_item_idx)
-	print('current menu item: ', current_menu_item.menu_name)
+	highlight_current_menu_item(current_menu_item_idx)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("accept") or Input.is_action_just_pressed("cancel"):
@@ -28,10 +27,15 @@ func _process(_delta: float) -> void:
 
 func handle_menu_selection() -> void:
 	if Input.is_action_just_pressed("accept") and state != States.SELECTED:
+		match state:
+			States.UNSELECTED:
+				current_menu_item.set_menu_label(Enums.MenuItemState.ACTIVE)
 		set_state(state+1)
 	if Input.is_action_just_pressed("cancel") and state != States.UNSELECTED:
+		match state:
+			States.SUBMENU_OPENED:
+				current_menu_item.set_menu_label(Enums.MenuItemState.HIGHLIGHTED)
 		set_state(state-1)
-
 			
 func handle_menu_navigation() -> void:
 	if state == States.UNSELECTED:
@@ -45,16 +49,14 @@ func handle_menu_navigation() -> void:
 			current_menu_item_idx += 1
 			if current_menu_item_idx == menu_items_size:
 				current_menu_item_idx = 0
-		set_current_menu_item(current_menu_item_idx)
-		
-		print('current menu item: ', current_menu_item.menu_name)
+		highlight_current_menu_item(current_menu_item_idx)
 
-func set_current_menu_item(idx: int) -> void:
+func highlight_current_menu_item(idx: int) -> void:
 	if (current_menu_item != null):
-		current_menu_item.set_menu_inactive()
+		current_menu_item.set_menu_label(Enums.MenuItemState.INACTIVE)
 
 	current_menu_item = menu_items[idx]
-	current_menu_item.set_menu_active()
+	current_menu_item.set_menu_label(Enums.MenuItemState.HIGHLIGHTED)
 
 func set_state(new_state: States) -> void:
 	var previous_state := state
