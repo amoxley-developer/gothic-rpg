@@ -5,22 +5,25 @@ extends Node2D
 @export var menu_name_node: RichTextLabel
 var menu_name: String
 var sub_menu_items: Array[SubMenuItem]
-var is_active := false
 
 func _ready() -> void:
-  menu_name = menu_resource.menu_name
-  sub_menu_items = menu_resource.sub_menu_items
-  set_menu_label()
+	
+	menu_name = menu_resource.menu_name
+	sub_menu_items = menu_resource.sub_menu_items
+	menu_name_node.bbcode_enabled = true
+	set_menu_label(Enums.MenuItemState.INACTIVE)
 
-func set_menu_label() -> void:
-  menu_name_node.text = menu_name
-
-func set_menu_active() -> void:
-  # change color to white
-  is_active = true
-  return
-
-func set_menu_inactive() -> void:
-  # change color to grey
-  is_active = false
-  return
+func set_menu_label(menu_item_state: Enums.MenuItemState) -> void:
+	menu_name_node.text = ''
+	var color: Color
+	match menu_item_state:
+		Enums.MenuItemState.INACTIVE:
+			color = Color.BLACK
+		Enums.MenuItemState.HIGHLIGHTED:
+			color = Color.GRAY
+		Enums.MenuItemState.ACTIVE:
+			color = Color.WHITE
+	
+	menu_name_node.push_color(color)
+	menu_name_node.append_text(menu_name)
+	menu_name_node.pop()
