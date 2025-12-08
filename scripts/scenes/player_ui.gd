@@ -91,7 +91,6 @@ func set_state(new_state: States) -> void:
 func create_menu_items() -> void:
 	var y_pos := 0
 	for menu_resource in menu_items_resources:
-		# WARNING create a shared function here
 		var battle_menu_item_bar: BattleMenuItemBar = battleMenuItemBarScn.instantiate()
 		battle_menu_item_bar.menu_resource = menu_resource
 		battle_menu_item_bar.position = Vector2(0, y_pos)
