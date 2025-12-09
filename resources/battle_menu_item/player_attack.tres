@@ -9,4 +9,3 @@
 script = ExtResource("1_et5ft")
 menu_name = "Attack"
 sub_menu_items = Array[ExtResource("2_k6y3y")]([ExtResource("3_b7bws"), ExtResource("4_nw7p0")])
-metadata/_custom_type_script = "uid://cm1t0tx2ajv5w"
