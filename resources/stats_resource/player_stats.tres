@@ -4,10 +4,12 @@
 
 [resource]
 script = ExtResource("1_sqe8w")
-health = 10
+health = 20
+base_health = 20
 mana = 5
-attack = 3
+attack = 5
+base_attack = 5
 defense = 2
-speed = 5
-luck = 5
+speed = 10
+luck = 10
 metadata/_custom_type_script = "uid://b2svhba1i86yr"
