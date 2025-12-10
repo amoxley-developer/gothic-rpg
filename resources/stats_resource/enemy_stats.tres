@@ -4,10 +4,12 @@
 
 [resource]
 script = ExtResource("1_3dfpq")
-health = 20
+health = 10
+base_health = 10
 mana = 5
-attack = 5
+attack = 3
+base_attack = 3
 defense = 3
-speed = 10
-luck = 10
+speed = 5
+luck = 3
 metadata/_custom_type_script = "uid://b2svhba1i86yr"
