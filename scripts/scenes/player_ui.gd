@@ -17,6 +17,8 @@ var current_sub_menu_item: BattleMenuItemBar
 var current_menu_item: BattleMenuItemBar
 var current_menu_item_idx := 0
 
+signal execute_attack(attack_name: String)
+
 var state: States = States.UNSELECTED
 
 func _ready() -> void:
@@ -39,6 +41,7 @@ func handle_menu_selection() -> void:
 				set_menu_status(null, current_sub_menu_item)
 			States.SUBMENU_OPENED:
 				current_sub_menu_item.set_menu_label(Enums.MenuItemState.ACTIVE)
+				execute_attack.emit(current_sub_menu_item.sub_menu_resource.name)
 		set_state(state+1)
 	if Input.is_action_just_pressed("cancel") and state != States.UNSELECTED:
 		match state:
