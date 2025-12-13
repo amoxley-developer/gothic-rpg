@@ -17,6 +17,8 @@ var current_sub_menu_item: BattleMenuItemBar
 var current_menu_item: BattleMenuItemBar
 var current_menu_item_idx := 0
 
+signal execute_attack(attack_name: String)
+
 var state: States = States.UNSELECTED
 
 func _ready() -> void:
@@ -32,23 +34,24 @@ func _process(_delta: float) -> void:
 
 func handle_menu_selection() -> void:
 	if Input.is_action_just_pressed("accept") and state != States.SELECTED:
+		set_state(state+1)
 		match state:
-			States.UNSELECTED:
+			States.SUBMENU_OPENED:
 				current_menu_item.set_menu_label(Enums.MenuItemState.ACTIVE)
 				create_sub_menu_items()
 				set_menu_status(null, current_sub_menu_item)
-			States.SUBMENU_OPENED:
+			States.SELECTED:
 				current_sub_menu_item.set_menu_label(Enums.MenuItemState.ACTIVE)
-		set_state(state+1)
+				execute_attack.emit(current_sub_menu_item.sub_menu_resource.name)
 	if Input.is_action_just_pressed("cancel") and state != States.UNSELECTED:
+		set_state(state-1)
 		match state:
-			States.SUBMENU_OPENED:
+			States.UNSELECTED:
 				current_menu_item.set_menu_label(Enums.MenuItemState.HIGHLIGHTED)
 				current_sub_menu_item_idx = 0
 				delete_sub_menu_items()
-			States.SELECTED:
+			States.SUBMENU_OPENED:
 				current_sub_menu_item.set_menu_label(Enums.MenuItemState.HIGHLIGHTED)
-		set_state(state-1)
 			
 func handle_menu_navigation() -> void:
 	match state:
@@ -114,4 +117,13 @@ func delete_sub_menu_items() -> void:
 	for sub_menu_item in sub_menu_items:
 		sub_menu_item.queue_free()
 	sub_menu_items = []
+	current_sub_menu_item_idx = 0
 	current_sub_menu_item = null
+
+func reset_menu() -> void:
+	delete_sub_menu_items()
+	set_state(States.UNSELECTED)
+	current_menu_item.set_menu_label(Enums.MenuItemState.INACTIVE)
+	current_menu_item_idx = 0
+	current_menu_item = menu_items[current_menu_item_idx]
+	current_menu_item.set_menu_label(Enums.MenuItemState.HIGHLIGHTED)
