@@ -1,10 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cncqrccnhghpk"]
+[gd_scene load_steps=4 format=3 uid="uid://cncqrccnhghpk"]
 
 [ext_resource type="Texture2D" uid="uid://b8i3x08b5y2ci" path="res://assets/sprites/enemy/enemy_sprite.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://buqjpfaw1ai3x" path="res://scripts/scenes/enemy.gd" id="1_md0e3"]
+[ext_resource type="FontFile" uid="uid://bhd41uea4230r" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="3_4ra3w"]
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_md0e3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7p1mj")
+
+[node name="HealthLabel" type="RichTextLabel" parent="."]
+offset_left = -44.0
+offset_top = -57.0
+offset_right = 44.0
+offset_bottom = -36.0
+theme_override_fonts/normal_font = ExtResource("3_4ra3w")
+text = "Health: 10"

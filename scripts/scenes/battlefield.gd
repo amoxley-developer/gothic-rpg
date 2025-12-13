@@ -9,5 +9,8 @@ func _ready() -> void:
   playerUI.execute_attack.connect(_on_player_attack)
 
 func _on_player_attack(attack_name: String) -> void:
-  print(attack_name)
-
+  if attack_name == 'Sword':
+    enemy.take_damage(3)
+  elif attack_name == 'Crossbow':
+    enemy.take_damage(2)
+  playerUI.reset_menu()
