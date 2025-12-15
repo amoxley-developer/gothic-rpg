@@ -7,7 +7,7 @@ extends Node2D
 @onready var attack_pre_timer: Timer = $AttackTimers/PreTimer
 @onready var attack_initial_timer: Timer = $AttackTimers/InitialTimer
 @onready var attack_optimal_timer: Timer = $AttackTimers/OptimalTimer
-
+@onready var attack_post_timer: Timer = $AttackTimers/PostTimer
 
 var current_attack: String
 
@@ -24,9 +24,7 @@ func _process(_delta: float) -> void:
 		if current_state == BattlefieldState.PLAYER_ATTACK:
 			execute_attack()
 
-
 func _on_player_attack(attack_name: String) -> void:
-	print('attacking')
 	set_state(BattlefieldState.PLAYER_ATTACK)
 	if attack_name == 'Sword':
 		enemy.take_damage(3)
@@ -67,18 +65,21 @@ func execute_attack() -> void:
 	attack_optimal_timer.stop()
 
 	enemy.take_damage(ceil(base_damage * attack_multiplier))
-	playerUI.unpause_ui()
+	attack_post_timer.start()
 	playerUI.reset_menu()
-	set_state(BattlefieldState.UI_SELECTION)
+	player.display_default_sprite()
 
 func _on_pre_timer_timeout() -> void:
-	print('completed pre timer')
 	attack_initial_timer.start()
+	player.display_attack_sprite()
 
 func _on_initial_timer_timeout() -> void:
-	print('completed initial timer')
 	attack_optimal_timer.start()
+	player.display_optimal_attack_sprite()
 
 func _on_optimal_timer_timeout() -> void:
-	print('completed optimal timer')
 	execute_attack()
+
+func _on_post_timer_timeout() -> void:
+	playerUI.unpause_ui()
+	set_state(BattlefieldState.UI_SELECTION)

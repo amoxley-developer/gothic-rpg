@@ -87,10 +87,7 @@ func set_menu_status(prev_menu_item: BattleMenuItemBar, curr_menu_item: BattleMe
 	curr_menu_item.set_menu_label(Enums.MenuItemState.HIGHLIGHTED)
 
 func set_state(new_state: States) -> void:
-	var previous_state := state
 	state = new_state
-	print('previous_state: ', States.keys()[previous_state])
-	print('current_state: ', States.keys()[state])
 
 func create_menu_items() -> void:
 	var y_pos := 0

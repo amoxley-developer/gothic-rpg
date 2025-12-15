@@ -34,6 +34,11 @@ one_shot = true
 [node name="OptimalTimer" type="Timer" parent="AttackTimers"]
 one_shot = true
 
+[node name="PostTimer" type="Timer" parent="AttackTimers"]
+wait_time = 0.25
+one_shot = true
+
 [connection signal="timeout" from="AttackTimers/PreTimer" to="." method="_on_pre_timer_timeout"]
 [connection signal="timeout" from="AttackTimers/InitialTimer" to="." method="_on_initial_timer_timeout"]
 [connection signal="timeout" from="AttackTimers/OptimalTimer" to="." method="_on_optimal_timer_timeout"]
+[connection signal="timeout" from="AttackTimers/PostTimer" to="." method="_on_post_timer_timeout"]
