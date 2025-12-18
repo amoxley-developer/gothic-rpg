@@ -66,8 +66,6 @@ func execute_attack() -> void:
 
 	enemy.take_damage(ceil(base_damage * attack_multiplier))
 	attack_post_timer.start()
-	playerUI.reset_menu()
-	player.display_default_sprite()
 
 func _on_pre_timer_timeout() -> void:
 	attack_initial_timer.start()
@@ -81,5 +79,7 @@ func _on_optimal_timer_timeout() -> void:
 	execute_attack()
 
 func _on_post_timer_timeout() -> void:
+	playerUI.reset_menu()
+	player.display_default_sprite()
 	playerUI.unpause_ui()
 	set_state(BattlefieldState.UI_SELECTION)

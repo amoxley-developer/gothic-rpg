@@ -35,7 +35,7 @@ one_shot = true
 one_shot = true
 
 [node name="PostTimer" type="Timer" parent="AttackTimers"]
-wait_time = 0.25
+wait_time = 0.2
 one_shot = true
 
 [connection signal="timeout" from="AttackTimers/PreTimer" to="." method="_on_pre_timer_timeout"]
