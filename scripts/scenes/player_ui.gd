@@ -42,7 +42,8 @@ func handle_menu_selection() -> void:
 				set_menu_status(null, current_sub_menu_item)
 			States.SELECTED:
 				current_sub_menu_item.set_menu_label(Enums.MenuItemState.ACTIVE)
-				execute_attack.emit(current_sub_menu_item.sub_menu_resource.name)
+				if (current_menu_item.menu_resource.menu_name == "Attack"):
+					execute_attack.emit(current_sub_menu_item.sub_menu_resource.name)
 	if Input.is_action_just_pressed("cancel") and state != States.UNSELECTED:
 		set_state(state-1)
 		match state:
@@ -86,10 +87,7 @@ func set_menu_status(prev_menu_item: BattleMenuItemBar, curr_menu_item: BattleMe
 	curr_menu_item.set_menu_label(Enums.MenuItemState.HIGHLIGHTED)
 
 func set_state(new_state: States) -> void:
-	var previous_state := state
 	state = new_state
-	print('previous_state: ', States.keys()[previous_state])
-	print('current_state: ', States.keys()[state])
 
 func create_menu_items() -> void:
 	var y_pos := 0
@@ -127,3 +125,9 @@ func reset_menu() -> void:
 	current_menu_item_idx = 0
 	current_menu_item = menu_items[current_menu_item_idx]
 	current_menu_item.set_menu_label(Enums.MenuItemState.HIGHLIGHTED)
+
+func pause_ui() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+
+func unpause_ui() -> void:
+	process_mode = Node.PROCESS_MODE_INHERIT

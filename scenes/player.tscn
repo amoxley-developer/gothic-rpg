@@ -9,7 +9,7 @@
 script = ExtResource("1_g2els")
 stats_resource = ExtResource("2_qhqgy")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_3vyb7")
 
 [node name="HealthLabel" type="RichTextLabel" parent="."]
