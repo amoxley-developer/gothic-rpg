@@ -12,6 +12,7 @@ extends Node2D
 var current_attack: String
 var tween: Tween
 var attacked: bool
+var initial_player_pos: Vector2
 
 enum BattlefieldState {UI_SELECTION, PLAYER_ATTACK, ENEMY_ATTACK}
 
@@ -20,12 +21,18 @@ var current_state: BattlefieldState
 func _ready() -> void:
 	playerUI.execute_attack.connect(_on_player_attack)
 	set_state(BattlefieldState.UI_SELECTION)
+	initial_player_pos = player.position;
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("accept"):
 		if current_state == BattlefieldState.PLAYER_ATTACK:
 			if current_attack == 'Crossbow':
-				execute_crossbow_attack()
+				execute_attack()
+			if current_attack == 'Sword':
+				execute_sword_attack_start()
+	if Input.is_action_just_released("accept"):
+		if current_state == BattlefieldState.PLAYER_ATTACK && current_attack == 'Sword':
+			execute_attack()
 
 func _on_player_attack(attack_name: String) -> void:
 	set_state(BattlefieldState.PLAYER_ATTACK)
@@ -62,7 +69,7 @@ func start_crossbow_attack() -> void:
 	attack_optimal_timer.wait_time = 1
 	attack_pre_timer.start()
 
-func execute_crossbow_attack() -> void:
+func execute_attack() -> void:
 	if not attack_pre_timer.is_stopped() or attacked:
 		return
 	var attack_multiplier := 1.0
@@ -75,9 +82,23 @@ func execute_crossbow_attack() -> void:
 	attack_initial_timer.stop()
 	attack_optimal_timer.stop()
 
-	enemy.take_damage(ceil(2 * attack_multiplier))
+	var damage = 2 if current_attack == 'Crossbow' else 3;
+
+	if (current_attack == 'Sword'):
+		if tween:
+			tween.kill()
+		tween = create_tween()
+		tween.tween_property(player, "position", initial_player_pos, .5).set_trans(Tween.TRANS_SINE);
+
+	enemy.take_damage(ceil(damage * attack_multiplier))
 	attacked = true
 	attack_post_timer.start()
+
+func execute_sword_attack_start() -> void:
+	if not attack_pre_timer.is_stopped() or attacked:
+		return
+	player.display_attack_sprite()
+	attack_initial_timer.start()
 
 func _on_pre_timer_timeout() -> void:
 	if current_attack == 'Crossbow':
@@ -89,8 +110,7 @@ func _on_initial_timer_timeout() -> void:
 	player.display_optimal_attack_sprite()
 
 func _on_optimal_timer_timeout() -> void:
-	if (current_attack == 'Crossbow'):
-		execute_crossbow_attack()
+	execute_attack()
 
 func _on_post_timer_timeout() -> void:
 	playerUI.reset_menu()
